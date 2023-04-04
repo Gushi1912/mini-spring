@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans>
+    <bean id = "aService" class = "com.gushi.minis.service.impl.AServiceImpl"/>
+</beans>
+
+
+
