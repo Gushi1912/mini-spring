@@ -1,5 +1,6 @@
-package com.gushi.minis;
+package com.gushi.minis.core;
 
+import com.gushi.minis.core.Resource;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -13,7 +14,7 @@ import java.util.Iterator;
  * @Version 1.0.0
  * @Time 2025/3/6 15:04
  */
-public class ClassPathXmlResource implements Resource{
+public class ClassPathXmlResource implements Resource {
     Document document;
     Element rootElement;
 

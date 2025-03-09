@@ -1,4 +1,4 @@
-package com.gushi.minis;
+package com.gushi.minis.beans;
 
 /**
  * @Author Gushiyang
@@ -15,8 +15,15 @@ public interface BeanFactory {
     Object getBean(String beanName) throws BeansException;
 
     /**
-     * 向beanDefinitionMap中注册beanDefinition
-     * @param beanDefinition
+     * 是否包含bean
+     * @param name
+     * @return
      */
-    void registerBeanDefinition(BeanDefinition beanDefinition);
+    boolean containsBean(String name);
+
+    boolean isSingleton(String name);
+
+    boolean isPrototype(String name);
+
+    Class<?> getType(String name);
 }

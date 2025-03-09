@@ -1,4 +1,4 @@
-package com.gushi.minis;
+package com.gushi.minis.core;
 
 import java.util.Iterator;
 

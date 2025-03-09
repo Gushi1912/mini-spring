@@ -1,12 +1,19 @@
-package com.gushi.minis;
+package com.gushi.minis.context;
 
+
+import com.gushi.minis.beans.BeansException;
+import com.gushi.minis.beans.BeanDefinition;
+import com.gushi.minis.beans.BeanFactory;
+import com.gushi.minis.beans.SimpleBeanFactory;
+import com.gushi.minis.beans.XmlBeanDefinitionReader;
+import com.gushi.minis.core.ClassPathXmlResource;
 
 /**
  * @Author Gushiyang
  * @Version 1.0.0
  * @Time 2023/4/4 14:36
  */
-public class ClassPathXmlApplicationContext implements BeanFactory{
+public class ClassPathXmlApplicationContext implements BeanFactory , ApplicationEventPublisher{
 
     BeanFactory beanFactory;
 
@@ -24,10 +31,26 @@ public class ClassPathXmlApplicationContext implements BeanFactory{
         return this.beanFactory.getBean(beanName);
     }
 
-    @Override
-    public void registerBeanDefinition(BeanDefinition beanDefinition) {
-        this.beanFactory.registerBeanDefinition(beanDefinition);
+    public boolean containsBean(String name) {
+        return this.beanFactory.containsBean(name);
     }
+
+    public void publishEvent(ApplicationEvent event) {
+
+    }
+
+    public boolean isSingleton(String name) {
+        return false;
+    }
+
+    public boolean isPrototype(String name) {
+        return false;
+    }
+
+    public Class<?> getType(String name) {
+        return null;
+    }
+
 
     public static void main(String[] args) throws BeansException {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("beans.xml");

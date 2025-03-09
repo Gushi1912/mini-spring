@@ -1,5 +1,6 @@
-package com.gushi.minis;
+package com.gushi.minis.beans;
 
+import com.gushi.minis.core.Resource;
 import org.dom4j.Element;
 
 /**
@@ -8,10 +9,10 @@ import org.dom4j.Element;
  * @Time 2025/3/6 15:15
  */
 public class XmlBeanDefinitionReader {
-    BeanFactory beanFactory;
+    SimpleBeanFactory simpleBeanFactory;
 
-    public XmlBeanDefinitionReader(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
+    public XmlBeanDefinitionReader(SimpleBeanFactory beanFactory) {
+        this.simpleBeanFactory = beanFactory;
     }
 
     public void loadBeanDefinitions(Resource resource) {
@@ -20,7 +21,9 @@ public class XmlBeanDefinitionReader {
             String beanId = element.attributeValue("id");
             String beanClassName = element.attributeValue("class");
             BeanDefinition beanDefinition = new BeanDefinition(beanId, beanClassName);
-            this.beanFactory.registerBeanDefinition(beanDefinition);
+            this.simpleBeanFactory.registerBeanDefinition(beanId, beanDefinition);
+
+            //处理属性
         }
     }
 }
