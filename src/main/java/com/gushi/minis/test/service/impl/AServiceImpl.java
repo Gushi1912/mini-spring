@@ -1,6 +1,7 @@
-package com.gushi.minis.service.impl;
+package com.gushi.minis.test.service.impl;
 
-import com.gushi.minis.service.AService;
+import com.gushi.minis.test.service.AService;
+import com.gushi.minis.test.service.BService;
 
 /**
  * @Author Gushiyang
@@ -15,6 +16,8 @@ public class AServiceImpl implements AService {
 
     private String property1;
     private String property2;
+
+    private BService bService;
 
 
     public AServiceImpl(String name, int level) {
@@ -42,5 +45,24 @@ public class AServiceImpl implements AService {
 
     public void setProperty2(String property2) {
         this.property2 = property2;
+    }
+
+    public BService getBService() {
+        return bService;
+    }
+
+    public void setBService(BServiceImpl bService) {
+        this.bService = bService;
+    }
+
+    @Override
+    public String toString() {
+        return "AServiceImpl{" +
+                "name='" + name + '\'' +
+                ", level=" + level +
+                ", property1='" + property1 + '\'' +
+                ", property2='" + property2 + '\'' +
+                ", bService=" + bService +
+                '}';
     }
 }

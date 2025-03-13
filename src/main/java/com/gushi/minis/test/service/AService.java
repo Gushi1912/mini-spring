@@ -1,4 +1,4 @@
-package com.gushi.minis.service;
+package com.gushi.minis.test.service;
 
 /**
  * @Author Gushiyang

@@ -1,5 +1,6 @@
 package com.gushi.minis.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +10,10 @@ import java.util.List;
  */
 public class PropertyValues {
     private final List<PropertyValue> propertyValueList;
+
+    public PropertyValues() {
+        this.propertyValueList = new ArrayList<>(10);
+    }
 
     public PropertyValues(List<PropertyValue> propertyValues) {
         this.propertyValueList = propertyValues;
@@ -26,9 +31,9 @@ public class PropertyValues {
         this.propertyValueList.add(pv);
     }
 
-    public void addPropertyValue(String propertyName, Object propertyValue) {
-        addPropertyValue(new PropertyValue(propertyName, propertyValue));
-    }
+//    public void addPropertyValue(String propertyType, String propertyName, Object propertyValue) {
+//        addPropertyValue(new PropertyValue(propertyType, propertyName, propertyValue));
+//    }
 
     public void removePropertyValue(PropertyValue pv) {
         this.propertyValueList.remove(pv);

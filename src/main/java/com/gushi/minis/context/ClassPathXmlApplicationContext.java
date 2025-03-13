@@ -2,11 +2,11 @@ package com.gushi.minis.context;
 
 
 import com.gushi.minis.beans.BeansException;
-import com.gushi.minis.beans.BeanDefinition;
 import com.gushi.minis.beans.BeanFactory;
 import com.gushi.minis.beans.SimpleBeanFactory;
 import com.gushi.minis.beans.XmlBeanDefinitionReader;
 import com.gushi.minis.core.ClassPathXmlResource;
+import com.gushi.minis.test.service.AService;
 
 /**
  * @Author Gushiyang
@@ -15,15 +15,23 @@ import com.gushi.minis.core.ClassPathXmlResource;
  */
 public class ClassPathXmlApplicationContext implements BeanFactory , ApplicationEventPublisher{
 
-    BeanFactory beanFactory;
+    SimpleBeanFactory beanFactory;
 
     public ClassPathXmlApplicationContext(String fileName) {
+        this(fileName, true);
+    }
+
+    public ClassPathXmlApplicationContext(String fileName, boolean isRefresh) {
         ClassPathXmlResource classPathXmlResource = new ClassPathXmlResource(fileName);
         SimpleBeanFactory simpleBeanFactory = new SimpleBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(simpleBeanFactory);
         reader.loadBeanDefinitions(classPathXmlResource);
         this.beanFactory = simpleBeanFactory;
+        if (isRefresh) {
+            this.beanFactory.refresh();
+        }
     }
+
 
 
     @Override
@@ -54,7 +62,7 @@ public class ClassPathXmlApplicationContext implements BeanFactory , Application
 
     public static void main(String[] args) throws BeansException {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("beans.xml");
-        Object aService = classPathXmlApplicationContext.getBean("aService");
+        AService aService = (AService) classPathXmlApplicationContext.getBean("aService");
         System.out.println(aService);
     }
 }
