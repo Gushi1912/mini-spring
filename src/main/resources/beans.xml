@@ -9,7 +9,7 @@
     </bean>
 
     <bean id="bService" class="com.gushi.minis.test.service.impl.BServiceImpl">
-        <property type="com.gushi.minis.test.BaseService" name="baseService" ref="baseService"/>
+<!--        <property type="com.gushi.minis.test.BaseService" name="baseService" ref="baseService"/>-->
     </bean>
 
     <bean id="baseService" class="com.gushi.minis.test.BaseService"/>

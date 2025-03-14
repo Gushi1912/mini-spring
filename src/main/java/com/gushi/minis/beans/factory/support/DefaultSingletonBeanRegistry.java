@@ -1,17 +1,18 @@
-package com.gushi.minis.beans;
+package com.gushi.minis.beans.factory.support;
+
+import com.gushi.minis.beans.factory.config.SingletonBeanRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @Author Gushiyang
  * @Version 1.0.0
  * @Time 2025/3/7 9:19
  */
-public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry{
+public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
 
     //容器中存放所有bean的名称的列表
     protected List<String> beanNames = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.gushi.minis.beans;
+package com.gushi.minis.beans.factory.config;
 
 /**
  * @Author Gushiyang

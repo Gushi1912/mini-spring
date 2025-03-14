@@ -1,4 +1,6 @@
-package com.gushi.minis.beans;
+package com.gushi.minis.beans.factory.support;
+
+import com.gushi.minis.beans.factory.config.BeanDefinition;
 
 /**
  * @Author Gushiyang

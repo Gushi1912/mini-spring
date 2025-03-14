@@ -1,4 +1,7 @@
-package com.gushi.minis.beans;
+package com.gushi.minis.beans.factory.config;
+
+import com.gushi.minis.beans.PropertyValues;
+import com.gushi.minis.beans.factory.config.ConstructorArgumentValues;
 
 /**
  * @Author Gushiyang
@@ -11,7 +14,7 @@ public class BeanDefinition {
     String SCOPE_PROPERTY = "prototype";
     private boolean lazyInit = true;
     private String[] dependsOn;
-    private ArgumentValues constructorArgumentValues;
+    private ConstructorArgumentValues constructorArgumentValues;
     private PropertyValues propertyValues;
     private String initMethodName;
     private volatile Object beanClass;
@@ -57,11 +60,11 @@ public class BeanDefinition {
         this.dependsOn = dependsOn;
     }
 
-    public ArgumentValues getConstructorArgumentValues() {
+    public ConstructorArgumentValues getConstructorArgumentValues() {
         return constructorArgumentValues;
     }
 
-    public void setConstructorArgumentValues(ArgumentValues constructorArgumentValues) {
+    public void setConstructorArgumentValues(ConstructorArgumentValues constructorArgumentValues) {
         this.constructorArgumentValues = constructorArgumentValues;
     }
 

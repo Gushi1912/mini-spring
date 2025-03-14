@@ -1,5 +1,6 @@
 package com.gushi.minis.test.service.impl;
 
+import com.gushi.minis.beans.factory.annotation.Autowired;
 import com.gushi.minis.test.BaseService;
 import com.gushi.minis.test.service.BService;
 
@@ -9,9 +10,17 @@ import com.gushi.minis.test.service.BService;
  * @Time 2025/3/13 16:20
  */
 public class BServiceImpl implements BService {
+    @Autowired
     private BaseService baseService;
 
     public void setBaseService(BaseService baseService) {
         this.baseService = baseService;
+    }
+
+    @Override
+    public String toString() {
+        return "BServiceImpl{" +
+                "baseService=" + baseService +
+                '}';
     }
 }

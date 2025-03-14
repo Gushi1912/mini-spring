@@ -1,5 +1,10 @@
-package com.gushi.minis.beans;
+package com.gushi.minis.beans.factory.xml;
 
+import com.gushi.minis.beans.*;
+import com.gushi.minis.beans.factory.config.AutowireCapableBeanFactory;
+import com.gushi.minis.beans.factory.config.BeanDefinition;
+import com.gushi.minis.beans.factory.config.ConstructorArgumentValue;
+import com.gushi.minis.beans.factory.config.ConstructorArgumentValues;
 import com.gushi.minis.core.Resource;
 import org.dom4j.Element;
 
@@ -12,10 +17,14 @@ import java.util.List;
  * @Time 2025/3/6 15:15
  */
 public class XmlBeanDefinitionReader {
-    SimpleBeanFactory simpleBeanFactory;
+    AutowireCapableBeanFactory beanFactory;
 
-    public XmlBeanDefinitionReader(SimpleBeanFactory beanFactory) {
-        this.simpleBeanFactory = beanFactory;
+//    public XmlBeanDefinitionReader(SimpleBeanFactory beanFactory) {
+//        this.beanFactory = beanFactory;
+//    }
+
+    public XmlBeanDefinitionReader(AutowireCapableBeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
     }
 
     public void loadBeanDefinitions(Resource resource) {
@@ -49,15 +58,15 @@ public class XmlBeanDefinitionReader {
             beanDefinition.setDependsOn(refs.toArray(new String[0]));
             //处理构造器参数
             List<Element> constructorElements = element.elements("constructor-arg");
-            ArgumentValues argumentValues = new ArgumentValues();
+            ConstructorArgumentValues argumentValues = new ConstructorArgumentValues();
             for (Element constructorElement : constructorElements) {
                 String aType = constructorElement.attributeValue("type");
                 String aName = constructorElement.attributeValue("name");
                 String aValue = constructorElement.attributeValue("value");
-                argumentValues.addArgumentValue(new ArgumentValue(aValue, aType, aName));
+                argumentValues.addArgumentValue(new ConstructorArgumentValue(aValue, aType, aName));
             }
             beanDefinition.setConstructorArgumentValues(argumentValues);
-            this.simpleBeanFactory.registerBeanDefinition(beanId, beanDefinition);
+            this.beanFactory.registerBeanDefinition(beanId, beanDefinition);
         }
     }
 }

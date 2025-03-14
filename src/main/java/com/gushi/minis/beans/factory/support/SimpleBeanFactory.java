@@ -1,4 +1,10 @@
-package com.gushi.minis.beans;
+package com.gushi.minis.beans.factory.support;
+
+import com.gushi.minis.beans.*;
+import com.gushi.minis.beans.factory.BeanFactory;
+import com.gushi.minis.beans.factory.config.BeanDefinition;
+import com.gushi.minis.beans.factory.config.ConstructorArgumentValue;
+import com.gushi.minis.beans.factory.config.ConstructorArgumentValues;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -72,14 +78,14 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
         try {
             clz = Class.forName(beanDefinition.getClassName());
             //处理构造器参数
-            ArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
+            ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
             if (!constructorArgumentValues.isEmpty()) {
                 int argumentCount = constructorArgumentValues.getArgumentCount();
                 Class<?>[] paramTypes = new Class<?>[argumentCount];
                 Object[] paramValues = new Object[argumentCount];
                 //对每一个参数，分数据类型分别处理
                 for (int i = 0; i < argumentCount; i++) {
-                    ArgumentValue indexedArgumentValue = constructorArgumentValues.getIndexedArgumentValue(i);
+                    ConstructorArgumentValue indexedArgumentValue = constructorArgumentValues.getIndexedArgumentValue(i);
                     if ("String".equals(indexedArgumentValue.getType()) || "java.lang.String".equals(indexedArgumentValue.getType())) {
                         paramTypes[i] = String.class;
                         paramValues[i] = indexedArgumentValue.getValue();

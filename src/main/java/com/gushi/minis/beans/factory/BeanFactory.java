@@ -1,4 +1,6 @@
-package com.gushi.minis.beans;
+package com.gushi.minis.beans.factory;
+
+import com.gushi.minis.beans.BeansException;
 
 /**
  * @Author Gushiyang
