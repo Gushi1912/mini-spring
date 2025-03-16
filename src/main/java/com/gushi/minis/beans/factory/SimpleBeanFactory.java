@@ -190,7 +190,7 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
 
     @Override
     public boolean containsBean(String name) {
-        return this.containSingleton(name);
+        return this.containsSingleton(name);
     }
 
     public void registerBeanDefinition(String name, BeanDefinition beanDefinition) {

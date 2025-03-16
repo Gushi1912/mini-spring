@@ -91,7 +91,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry
 
     @Override
     public boolean containsBean(String name) {
-        return containSingleton(name);
+        return containsSingleton(name);
     }
 
     public void registerBean(String beanName, Object obj) {
