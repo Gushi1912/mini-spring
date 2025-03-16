@@ -8,6 +8,10 @@ import java.util.EventObject;
  * @Time 2025/3/7 9:46
  */
 public class ApplicationEvent extends EventObject {
+
+
+    protected String msg = null;
+
     /**
      * Constructs a prototypical Event.
      *
@@ -16,5 +20,6 @@ public class ApplicationEvent extends EventObject {
      */
     public ApplicationEvent(Object source) {
         super(source);
+        this.msg = source.toString();
     }
 }

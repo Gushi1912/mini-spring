@@ -1,8 +1,7 @@
 package com.gushi.minis.beans.factory.config;
 
-import com.gushi.minis.beans.AbstractBeanFactory;
+import com.gushi.minis.beans.factory.support.AbstractBeanFactory;
 import com.gushi.minis.beans.BeansException;
-import com.gushi.minis.beans.factory.annotation.AutowireCapableBeanFactory;
 import com.gushi.minis.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 
 import java.util.ArrayList;

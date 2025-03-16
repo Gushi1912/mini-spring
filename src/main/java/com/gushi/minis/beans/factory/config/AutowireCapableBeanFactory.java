@@ -1,4 +1,4 @@
-package com.gushi.minis.beans.factory.annotation;
+package com.gushi.minis.beans.factory.config;
 
 import com.gushi.minis.beans.BeansException;
 import com.gushi.minis.beans.factory.BeanFactory;

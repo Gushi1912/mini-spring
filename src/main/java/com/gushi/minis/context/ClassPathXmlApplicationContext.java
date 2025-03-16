@@ -2,8 +2,9 @@ package com.gushi.minis.context;
 
 
 import com.gushi.minis.beans.BeansException;
+import com.gushi.minis.beans.factory.config.ConfigurableListableBeanFactory;
+import com.gushi.minis.beans.factory.support.DefaultListableBeanFactory;
 import com.gushi.minis.beans.factory.config.AutowireCapableBeanFactory;
-import com.gushi.minis.beans.factory.BeanFactory;
 import com.gushi.minis.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import com.gushi.minis.beans.factory.xml.XmlBeanDefinitionReader;
 import com.gushi.minis.core.ClassPathXmlResource;
@@ -14,10 +15,10 @@ import com.gushi.minis.test.service.AService;
  * @Version 1.0.0
  * @Time 2023/4/4 14:36
  */
-public class ClassPathXmlApplicationContext implements BeanFactory , ApplicationEventPublisher{
+public class ClassPathXmlApplicationContext extends AbstractApplicationContext{
 
 //    SimpleBeanFactory beanFactory;
-    AutowireCapableBeanFactory beanFactory;
+    DefaultListableBeanFactory beanFactory;
 
     public ClassPathXmlApplicationContext(String fileName) {
         this(fileName, true);
@@ -25,8 +26,7 @@ public class ClassPathXmlApplicationContext implements BeanFactory , Application
 
     public ClassPathXmlApplicationContext(String fileName, boolean isRefresh) {
         ClassPathXmlResource classPathXmlResource = new ClassPathXmlResource(fileName);
-//        SimpleBeanFactory simpleBeanFactory = new SimpleBeanFactory();
-        AutowireCapableBeanFactory autowireCapableBeanFactory = new AutowireCapableBeanFactory();
+        DefaultListableBeanFactory autowireCapableBeanFactory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(autowireCapableBeanFactory);
         reader.loadBeanDefinitions(classPathXmlResource);
         this.beanFactory = autowireCapableBeanFactory;
@@ -39,18 +39,35 @@ public class ClassPathXmlApplicationContext implements BeanFactory , Application
         }
     }
 
-
-    public void refresh() throws BeansException, IllegalStateException {
-        registerBeanPostProcessor(this.beanFactory);
-        onRefresh();
+    @Override
+    void registerListeners() {
+        ApplicationListener applicationListener = new ApplicationListener();
+        this.getApplicationEventPublisher().addApplicationListener(applicationListener);
     }
 
-    private void registerBeanPostProcessor(AutowireCapableBeanFactory beanFactory) {
+    @Override
+    void initApplicationEventPublisher() {
+        SimpleApplicationEventPublisher aep = new SimpleApplicationEventPublisher();
+        this.setApplicationEventPublisher(aep);
+    }
+
+    @Override
+    void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+
+    }
+
+
+    void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
         beanFactory.addBeanPostProcessor(new AutowiredAnnotationBeanPostProcessor());
     }
 
-    private void onRefresh() {
+    void onRefresh() {
         this.beanFactory.refresh();
+    }
+
+    @Override
+    void finishRefresh() {
+        publishEvent(new ContextRefreshEvent("context refreshed..."));
     }
 
 
@@ -59,12 +76,24 @@ public class ClassPathXmlApplicationContext implements BeanFactory , Application
         return this.beanFactory.getBean(beanName);
     }
 
+    @Override
     public boolean containsBean(String name) {
         return this.beanFactory.containsBean(name);
     }
 
+    @Override
     public void publishEvent(ApplicationEvent event) {
+        this.getApplicationEventPublisher().publishEvent(event);
+    }
 
+    @Override
+    public void addApplicationListener(ApplicationListener listener) {
+        this.getApplicationEventPublisher().addApplicationListener(listener);
+    }
+
+    @Override
+    public ConfigurableListableBeanFactory getBeanFactory() {
+        return this.beanFactory;
     }
 
     public boolean isSingleton(String name) {
@@ -78,6 +107,7 @@ public class ClassPathXmlApplicationContext implements BeanFactory , Application
     public Class<?> getType(String name) {
         return null;
     }
+
 
 
     public static void main(String[] args) throws BeansException {

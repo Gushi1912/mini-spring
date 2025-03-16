@@ -1,7 +1,7 @@
 package com.gushi.minis.beans.factory.xml;
 
 import com.gushi.minis.beans.*;
-import com.gushi.minis.beans.factory.config.AutowireCapableBeanFactory;
+import com.gushi.minis.beans.factory.support.DefaultListableBeanFactory;
 import com.gushi.minis.beans.factory.config.BeanDefinition;
 import com.gushi.minis.beans.factory.config.ConstructorArgumentValue;
 import com.gushi.minis.beans.factory.config.ConstructorArgumentValues;
@@ -17,13 +17,13 @@ import java.util.List;
  * @Time 2025/3/6 15:15
  */
 public class XmlBeanDefinitionReader {
-    AutowireCapableBeanFactory beanFactory;
+    DefaultListableBeanFactory beanFactory;
 
 //    public XmlBeanDefinitionReader(SimpleBeanFactory beanFactory) {
 //        this.beanFactory = beanFactory;
 //    }
 
-    public XmlBeanDefinitionReader(AutowireCapableBeanFactory beanFactory) {
+    public XmlBeanDefinitionReader(DefaultListableBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 

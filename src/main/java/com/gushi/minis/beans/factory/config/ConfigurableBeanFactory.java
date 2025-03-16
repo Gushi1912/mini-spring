@@ -1,7 +1,6 @@
-package com.gushi.minis.beans.factory;
+package com.gushi.minis.beans.factory.config;
 
-import com.gushi.minis.beans.BeanPostProcessor;
-import com.gushi.minis.beans.factory.config.SingletonBeanRegistry;
+import com.gushi.minis.beans.factory.BeanFactory;
 
 /**
  * @Author Gushiyang
